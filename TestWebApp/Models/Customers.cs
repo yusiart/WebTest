@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TestWebApp.Models
@@ -9,7 +10,7 @@ namespace TestWebApp.Models
         female
     }
 
-    public class Customers
+    public class Customer
     {
         [Key]
         public int CustomerId { get; set; }
@@ -18,7 +19,7 @@ namespace TestWebApp.Models
         public string Email { get; set; }
         public DateTime Birthdate { get; set; }
         public Gender Gender { get; set; }
-        public Address Addresses { get; set; }
+        public List<Address> Addresses { get; set; }
 
         //public Customers(int id, string fullName, string email, DateTime birthdate)
         //{

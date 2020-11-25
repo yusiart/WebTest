@@ -31,18 +31,7 @@ namespace TestWebApp
             services.AddControllersWithViews();
 
             services.AddDbContext<CustomerContext>(options =>
-            {
-                var connectionString = Configuration.GetConnectionString("CustomerContext");
-
-                if (Environment.IsDevelopment())
-                {
-                    options.UseSqlite(connectionString);
-                }
-                else
-                {
-                    options.UseSqlServer(connectionString);
-                }
-            });
+           options.UseSqlServer(Configuration.GetConnectionString("CustomerContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
