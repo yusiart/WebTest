@@ -29,7 +29,7 @@ namespace TestWebApp.Data
                         Email = "example@gmail.com",
                         Birthdate = DateTime.Parse("1995-8-11"),
                         Gender = Gender.male,
-                        Addresses = new List<Address> {new Address("Baker street"), new Address("Saules Street") }
+                        Addresses = new List<Address> {new Address(2, "Baker street", Country.Latvia, "Lv", 009), new Address(1, "Baker street", Country.Latvia, "Ru", 77) }
                     },
 
                     new Customer
@@ -37,7 +37,7 @@ namespace TestWebApp.Data
                         Email = "alex@gmail.com",
                         Birthdate = DateTime.Parse("1995-3-12"),
                         Gender = Gender.female,
-                        Addresses = new List<Address> { new Address("Baker street"), new Address("Saules Street") }
+                        Addresses = new List<Address> { new Address(77, "Rigas street", Country.Latvia, "Sw", 55), new Address(55, "Cinema street", Country.Russia, "Lv", 11) }
                     },
 
                     new Customer
@@ -45,15 +45,7 @@ namespace TestWebApp.Data
                         Email = "mikhail@inbox.com",
                         Birthdate = DateTime.Parse("1992-8-22"),
                         Gender = Gender.male,
-                        Addresses = new List<Address> { new Address("Baker street"), new Address("Saules Street") }
-                    },
-
-                    new Customer
-                    {
-                        Email = "example2@gmail.com",
-                        Birthdate = DateTime.Parse("1998-2-23"),
-                        Gender = Gender.female,
-                        Addresses = new List<Address> { new Address("Baker street"), new Address("Saules Street") }
+                        Addresses = new List<Address> { new Address(1, "Rezeknes street", Country.Russia, "DDS", 12), new Address(2, "Saules street", Country.Latvia, "Lv", 11) }
                     }
                 ) ;
                 context.SaveChanges();
