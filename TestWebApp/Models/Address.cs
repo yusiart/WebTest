@@ -21,10 +21,10 @@ namespace TestWebApp.Models
         public int CountryId { get; set; }
   
 
-        public Address(int customerId, string streetAdress, Country country, string zip, int countryId)
+        public Address(int customerId, string streetAddress, Country country, string zip, int countryId)
         {
             CustomerId = customerId;
-            StreetAddress = streetAdress;
+            StreetAddress = streetAddress;
             Country = country;
             Zip = zip;
             CountryId = countryId;
