@@ -26,6 +26,7 @@ namespace TestWebApp.Data
                 context.Customers.AddRange(
                     new Customer
                     {
+                        FullName = "Alez",
                         Email = "example@gmail.com",
                         Birthdate = DateTime.Parse("1995-8-11"),
                         Gender = Gender.male,
@@ -34,6 +35,7 @@ namespace TestWebApp.Data
 
                     new Customer
                     {
+                        FullName = "Rick",
                         Email = "alex@gmail.com",
                         Birthdate = DateTime.Parse("1995-3-12"),
                         Gender = Gender.female,
@@ -42,6 +44,7 @@ namespace TestWebApp.Data
 
                     new Customer
                     {
+                        FullName = "Alex",
                         Email = "mikhail@inbox.com",
                         Birthdate = DateTime.Parse("1992-8-22"),
                         Gender = Gender.male,

@@ -19,7 +19,7 @@ namespace TestWebApp.Models
         public Country Country { get; set; }
         public string Zip { get; set; }
         public int CountryId { get; set; }
-  
+
 
         public Address(int customerId, string streetAddress, Country country, string zip, int countryId)
         {
@@ -30,5 +30,4 @@ namespace TestWebApp.Models
             CountryId = countryId;
         }
     }
-  
 }

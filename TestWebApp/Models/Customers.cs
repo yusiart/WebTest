@@ -21,12 +21,13 @@ namespace TestWebApp.Models
         public Gender Gender { get; set; }
         public List<Address> Addresses { get; set; }
 
-        //public Customers(int id, string fullName, string email, DateTime birthdate)
+        //public Customer(string fullName, string email, DateTime birthdate, Gender gender, List<Address> addresses)
         //{
-        //    Id = id;
         //    FullName = fullName;
         //    Email = email;
         //    Birthdate = birthdate;
+        //    Gender = gender;
+        //    Addresses = addresses;
         //}
     }
 }
