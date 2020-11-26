@@ -35,32 +35,7 @@ namespace TestWebApp.Controllers
             return View(FromSingleItem(customer));
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FullName, Email, Birthsdate, Gender, Address")] Customer customer)
-        //{
-        //    if (id != customer.CustomerId)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(customer);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-                   
-        //                throw;
-                   
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(customer);
-        //}
+     
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -77,12 +52,28 @@ namespace TestWebApp.Controllers
             return View(customer);
         }
 
-
-        public string Index()
+        public async Task<IActionResult> Delete(int? id)
         {
-            return "Hello Mtherfucker";
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customers
+                .FirstOrDefaultAsync(c => c.CustomerId == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
         }
 
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Customers.ToListAsync());
+        }
 
 
         private static IEnumerable<T> FromSingleItem<T>(T item)

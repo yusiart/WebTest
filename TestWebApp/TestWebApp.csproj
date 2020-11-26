@@ -17,4 +17,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="CustomerContext.db-wal" />
+    <None Remove="CustomerContext.db-shm" />
+  </ItemGroup>
 </Project>
