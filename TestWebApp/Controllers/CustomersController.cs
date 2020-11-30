@@ -32,6 +32,8 @@ namespace TestWebApp.Controllers
                 return NotFound();
             }
 
+            //var ratings = _context.Addresses.Where(d => d.CustomerId.Equals(id.Value)).ToList();
+
             var customer = await _context.Customers
                 .FirstOrDefaultAsync(m => m.CustomerId == id);
             if (customer == null)
@@ -52,7 +54,7 @@ namespace TestWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,FullName,Email,Birthdate,Gender,Address")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerId,FullName,Email,Birthdate,Gender")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +84,7 @@ namespace TestWebApp.Controllers
         // POST: Customer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FullName,Email,Birthdate,Gender,Address")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FullName,Email,Birthdate,Gender")] Customer customer)
         {
             if (id != customer.CustomerId)
             {

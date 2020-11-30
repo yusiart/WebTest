@@ -17,40 +17,82 @@ namespace TestWebApp.Data
             using (var context = new CustomerContext(
                 serviceProvider.GetRequiredService<DbContextOptions<CustomerContext>>()))
             {
-               
+
+                //context.Database.EnsureCreated();
+
                 if (context.Customers.Any())
                 {
                     return;
                 }
 
                 context.Customers.AddRange(
-                    new Customer
+                        new Customer
+                        {
+                            FullName = "Alez",
+                            Email = "example@gmail.com",
+                            Birthdate = DateTime.Parse("1995-8-11"),
+                            Gender = Gender.male
+
+                        },
+
+                        new Customer
+                        {
+                            FullName = "Rick",
+                            Email = "alex@gmail.com",
+                            Birthdate = DateTime.Parse("1995-3-12"),
+                            Gender = Gender.female
+
+                        },
+
+                        new Customer
+                        {
+                            FullName = "Alex",
+                            Email = "mikhail@inbox.com",
+                            Birthdate = DateTime.Parse("1992-8-22"),
+                            Gender = Gender.male
+
+                        });
+
+                context.SaveChanges();
+
+
+
+                // Addresses
+                if (context.Addresses.Any())
+                {
+                    return;
+                }
+
+
+                context.Addresses.AddRange(
+                       new Address
+                       {
+                           CustomerId = 1,
+                           StreetAddress = "Baker",
+                           Country = Country.Latvia,
+                           Zip = "Lv42",
+                           CountryId = 2
+                       },
+
+                    new Address
                     {
-                        FullName = "Alez",
-                        Email = "example@gmail.com",
-                        Birthdate = DateTime.Parse("1995-8-11"),
-                        Gender = Gender.male,
-                        Addresses = new List<Address> {new Address(2, "Baker street", Country.Latvia, "Lv", 009), new Address(1, "Baker street", Country.Latvia, "Ru", 77) }
+                        CustomerId = 1,
+                        StreetAddress = "Rigas",
+                        Country = Country.Latvia,
+                        Zip = "Lv41",
+                        CountryId = 2
                     },
 
-                    new Customer
+                    new Address
                     {
-                        FullName = "Rick",
-                        Email = "alex@gmail.com",
-                        Birthdate = DateTime.Parse("1995-3-12"),
-                        Gender = Gender.female,
-                        Addresses = new List<Address> { new Address(77, "Rigas street", Country.Latvia, "Sw", 55), new Address(55, "Cinema street", Country.Russia, "Lv", 11) }
-                    },
+                        CustomerId = 1,
+                        StreetAddress = "Sauiles",
+                        Country = Country.Russia,
+                        Zip = "Rus42",
+                        CountryId = 4
+                    });
 
-                    new Customer
-                    {
-                        FullName = "Alex",
-                        Email = "mikhail@inbox.com",
-                        Birthdate = DateTime.Parse("1992-8-22"),
-                        Gender = Gender.male,
-                        Addresses = new List<Address> { new Address(1, "Rezeknes street", Country.Russia, "DDS", 12), new Address(2, "Saules street", Country.Latvia, "Lv", 11) }
-                    }
-                ) ;
+
                 context.SaveChanges();
             }
         }
