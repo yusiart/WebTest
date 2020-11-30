@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TestWebApp.Data;
 using TestWebApp.Models;
@@ -21,8 +23,8 @@ namespace TestWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var customerContext = _context.Addresses.Include(o => o.Customer);
-            return View(await customerContext.ToListAsync());
+            var addressContexet = _context.Addresses.Include(o => o.Customer);
+            return View(await addressContexet.ToListAsync());
         }
 
         // GET: Addresses/Details/5
@@ -35,13 +37,90 @@ namespace TestWebApp.Controllers
 
             var address = await _context.Addresses
                 .Include(o => o.Customer)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.CustomerId == id);
             if (address == null)
             {
                 return NotFound();
             }
 
             return View(address);
+        }
+
+        // GET: Products/Create
+        public IActionResult Create()
+        {
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,CustomerId,StreetAddress,Country,Zip,CountryId")] Address address)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(address);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", address.CustomerId);
+            return View(address);
+        }
+
+        // GET: Products/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var address = await _context.Addresses.FindAsync(id);
+            if (address == null)
+            {
+                return NotFound();
+            }
+            ViewData["CategoryID"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", address.CustomerId);
+            return View(address);
+        }
+
+       //Addresses Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CustomerId,StreetAddress,Country,Zip,CountryId")] Address address)
+        {
+            if (id != address.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(address);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AddressExist(address.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", address.CustomerId);
+            return View(address);
+        }
+
+        private bool AddressExist(int id)
+        {
+            return _context.Addresses.Any(e => e.Id == id);
         }
 
     }
