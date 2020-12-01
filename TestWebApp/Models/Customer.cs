@@ -20,14 +20,5 @@ namespace TestWebApp.Models
         public DateTime Birthdate { get; set; }
         public Gender Gender { get; set; }
         public List<Address> Addresses { get; set; }
-
-        //public Customer(string fullName, string email, DateTime birthdate, Gender gender, List<Address> addresses)
-        //{
-        //    FullName = fullName;
-        //    Email = email;
-        //    Birthdate = birthdate;
-        //    Gender = gender;
-        //    Addresses = addresses;
-        //}
     }
 }

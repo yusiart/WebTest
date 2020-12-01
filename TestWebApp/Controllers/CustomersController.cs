@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +21,16 @@ namespace TestWebApp.Controllers
         }
 
         // GET: Customer
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Customers.ToListAsync());
+            //var customers = _context.Customers.Include(o => o.Addresses);
+            //return View(await customers.ToListAsync());
+
+            //return View(await _context.Customers.ToListAsync());
+
+            return View(_context.Customers.Include(a => a.Addresses).ToList());
         }
+
 
         // GET: Customer/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -90,6 +98,8 @@ namespace TestWebApp.Controllers
             {
                 return NotFound();
             }
+
+            Debug.Print("sfsdfdsfsdfsdf");
 
             if (ModelState.IsValid)
             {

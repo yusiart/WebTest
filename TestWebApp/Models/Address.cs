@@ -23,15 +23,5 @@ namespace TestWebApp.Models
         public string Zip { get; set; }
         public int CountryId { get; set; }
         public Customer Customer { get; set; }
-
-
-        //public Address(int customerId, string streetAddress, Country country, string zip, int countryId)
-        //{
-        //    CustomerId = customerId;
-        //    StreetAddress = streetAddress;
-        //    Country = country;
-        //    Zip = zip;
-        //    CountryId = countryId;
-        //}
     }
 }
