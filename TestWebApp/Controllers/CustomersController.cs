@@ -56,7 +56,7 @@ namespace TestWebApp.Controllers
         // POST: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,FullName,Email,Birthdate,Gender, Addresses")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerId ,FullName,Email,Birthdate,Gender, Addresses")] Customer customer)
         {
             if (ModelState.IsValid)
             {

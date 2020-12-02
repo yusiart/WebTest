@@ -46,16 +46,15 @@ namespace TestWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddAddress([Bind("CustomerId,StreetAddress,Country,Zip,CountryId")] Address address)
+        public async Task<IActionResult> AddAddress([Bind("CustomerId, StreetAddress,Country,Zip,CountryId")] Address address)
         {
 
             if (ModelState.IsValid)
             {
                 _context.Add(address);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Customers");
             }
-            ViewData["CustomerId"] = new SelectList(_context.Addresses, "Id", "Id", address.Id);
            
             return View(address);
         }
