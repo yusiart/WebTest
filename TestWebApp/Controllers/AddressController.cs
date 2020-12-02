@@ -54,6 +54,8 @@ namespace TestWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", address.CustomerId);
+           
             return View(address);
         }
 
@@ -76,6 +78,8 @@ namespace TestWebApp.Controllers
 
             return View(address);
         }
+
+
      
 
         // GET: Products/Create
