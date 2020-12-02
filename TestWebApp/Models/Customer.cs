@@ -24,19 +24,10 @@ namespace TestWebApp.Models
 
         public string FullName { get; set; }
         [Required]
-        [StringLength(15)]
+        [StringLength(30)]
         public string Email { get; set; }
         public DateTime Birthdate { get; set; }
         public Gender Gender { get; set; }
         public virtual ICollection<Address> Addresses { get; set; }
-
-
-        internal void CreateAddress(int count = 1)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                Addresses.Add(new Address());
-            }
-        }
     }
 }

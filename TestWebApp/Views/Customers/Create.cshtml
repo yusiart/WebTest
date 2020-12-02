@@ -33,7 +33,6 @@
                     @Html.DropDownListFor(m => m.Gender,
                             new SelectList(Enum.GetValues(typeof(Gender))),
                            "Select Gender")
-
                 </div>
             </div>
             <div class="form-group">
@@ -42,9 +41,6 @@
         </form>
     </div>
 </div>
-<form asp-controller="Address" asp-action="AddAddress">
-    <input type="hidden" asp-for="CustomerId" />
-    <input type="submit" value="AddAddress" class="btn btn-danger" /> |
+<form>
     <a asp-action="Index">Back to List</a>
 </form>
-

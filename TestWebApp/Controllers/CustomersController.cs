@@ -27,7 +27,6 @@ namespace TestWebApp.Controllers
         }
 
 
-
         // GET: Customer/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -55,7 +54,6 @@ namespace TestWebApp.Controllers
         }
 
         // POST: Customer/Create
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CustomerId,FullName,Email,Birthdate,Gender, Addresses")] Customer customer)
@@ -78,10 +76,9 @@ namespace TestWebApp.Controllers
             }
 
             var customer = await _context.Customers
-        .Include(o => o.Addresses)
-       .FirstOrDefaultAsync(m => m.CustomerId == id);
+             .Include(o => o.Addresses)
+             .FirstOrDefaultAsync(m => m.CustomerId == id);
 
-            //var customer = await _context.Customers.FindAsync(id);
             if (customer == null)
             {
                 return NotFound();
@@ -99,7 +96,6 @@ namespace TestWebApp.Controllers
                 return NotFound();
             }
 
-            Debug.Print("sfsdfdsfsdfsdf");
 
             if (ModelState.IsValid)
             {
@@ -133,7 +129,9 @@ namespace TestWebApp.Controllers
             }
 
             var customer = await _context.Customers
+                .Include(o => o.Addresses)
                 .FirstOrDefaultAsync(m => m.CustomerId == id);
+
             if (customer == null)
             {
                 return NotFound();
@@ -156,23 +154,6 @@ namespace TestWebApp.Controllers
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.CustomerId == id);
-        }
-
-        public ActionResult New()
-        {
-            var customers = new Customer();
-            customers.CreateAddress(2);
-            return View(customers);
-        }
-
-        public PartialViewResult Addresses(int id)
-        {
-            List<Address> address = (from addr in _context.Addresses
-                                      where addr.CustomerId == id
-                                      select addr).ToList();
-
-            return PartialView(address);
-
         }
     }
 }

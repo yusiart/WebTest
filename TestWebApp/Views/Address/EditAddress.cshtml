@@ -1,7 +1,7 @@
 ﻿@model TestWebApp.Models.Address
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "EditAddress";
 }
 
 <h1>Edit</h1>
@@ -10,23 +10,20 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="EditAddress">
+
+            @Html.Hidden("Id")
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="CustomerId" class="control-label"></label>
-                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.ProductID"></select>
-                <span asp-validation-for="CustomerId" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="StreetAddress" class="control-label"></label>
                 <input asp-for="StreetAddress" class="form-control" />
                 <span asp-validation-for="StreetAddress" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Country" class="control-label"></label>
-                <input asp-for="Country" class="form-control" />
-                <span asp-validation-for="Country" class="text-danger"></span>
+            <div>
+                @Html.DropDownListFor(m => m.Country,
+                     new SelectList(Enum.GetValues(typeof(Country))),
+                       "Select Country")
             </div>
             <div class="form-group">
                 <label asp-for="Zip" class="control-label"></label>
@@ -39,16 +36,11 @@
                 <span asp-validation-for="CountryId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Update" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<a asp-controller="Customers" asp-action="Index">Back to List</a>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
