@@ -39,8 +39,14 @@ namespace TestWebApp.Controllers
         }
 
 
-        public IActionResult AddAddress()
+        public IActionResult AddAddress(int? id)
         {
+           
+            var customer = _context.Customers.Find(id);
+
+
+            TempData["Customer"] = customer;
+
             return View();
         }
 
@@ -55,7 +61,10 @@ namespace TestWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Customers");
             }
-           
+
+            var customer = _context.Customers.Find(address.CustomerId);
+            TempData["Customer"] = customer;
+
             return View(address);
         }
 
@@ -101,7 +110,7 @@ namespace TestWebApp.Controllers
         // POST: Address/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAddress(int id, [Bind("Id,SreetAddress,Country,Zip,CountryId")] Address address)
+        public async Task<IActionResult> EditAddress(int id, [Bind("Id,CustomerId,StreetAddress,Country,Zip,CountryId")] Address address)
         {
             if (id != address.Id)
             {

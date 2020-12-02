@@ -13,7 +13,7 @@
         <form asp-action="EditAddress">
 
             @Html.Hidden("Id")
-
+            @Html.Hidden("CustomerId")
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="StreetAddress" class="control-label"></label>

@@ -6,6 +6,10 @@
 
 <h1>Edit</h1>
 
+@*<p>
+    <a asp-controller="Address" asp-action="AddAddress">Create address</a>
+</p>*@
+
 <h4>Customer</h4>
 <hr />
 <div class="row">
@@ -39,18 +43,19 @@
                 <input type="submit" value="Update" class="btn btn-primary" />
             </div>
         </form>
+        <a asp-controller="Address" asp-action="AddAddress" asp-route-id="@Model.CustomerId">Create address</a>
     </div>
 </div>
 
 
-<a asp-controller="Address" asp-action="AddAddress" asp-route-id="@Model.CustomerId"/>
-<input type="hidden" asp-for="CustomerId" />
-<input type="submit" value="AddAddress" class="btn btn-danger"/> 
+@*<a asp-controller="Address" asp-action="AddAddress" asp-route-id="@Model.CustomerId"/>*@
+@*<input type="hidden" asp-for="CustomerId" />
+<input type="submit" value="AddAddress" class="btn btn-danger"/>*@ 
 
-<form asp-controller="Address" asp-action="AddAddress" asp-route-id="@Model.CustomerId">
+@*<form asp-controller="Address" asp-action="AddAddress" asp-route-id="@Model.CustomerId">
     <input type="hidden" asp-for="CustomerId" />
     <input type="submit" value="AddAddress" class="btn btn-danger"/> 
-</form>
+</form>*@
 
 
 <a asp-action="Index">Back to List</a>
