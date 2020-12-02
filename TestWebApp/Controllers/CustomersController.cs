@@ -36,13 +36,10 @@ namespace TestWebApp.Controllers
                 return NotFound();
             }
 
-            //var addresses = from m in _context.Addresses
-            //               where m.CustomerId == id
-            //               select m;
-
             var customer = await _context.Customers
                  .Include(o => o.Addresses) 
                 .FirstOrDefaultAsync(m => m.CustomerId == id);
+
             if (customer == null)
             {
                 return NotFound();
@@ -61,7 +58,7 @@ namespace TestWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,FullName,Email,Birthdate,Gender")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerId,FullName,Email,Birthdate,Gender, Addresses")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +77,11 @@ namespace TestWebApp.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers
+        .Include(o => o.Addresses)
+       .FirstOrDefaultAsync(m => m.CustomerId == id);
+
+            //var customer = await _context.Customers.FindAsync(id);
             if (customer == null)
             {
                 return NotFound();

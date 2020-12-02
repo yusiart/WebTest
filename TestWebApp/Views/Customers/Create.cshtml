@@ -5,7 +5,7 @@
 }
 
 <h1>Create</h1>
-CustomerId,FullName,Email,Birthdate,Gender,Address
+
 <h4>Customer</h4>
 <hr />
 <div class="row">
@@ -29,21 +29,22 @@ CustomerId,FullName,Email,Birthdate,Gender,Address
                     <input asp-for="Birthdate" class="form-control" />
                     <span asp-validation-for="Birthdate" class="text-danger"></span>
                 </div>
-                @Html.DropDownListFor(m => m.Gender,
-                        new SelectList(Enum.GetValues(typeof(Gender))),
-                       "Select Gender")
+                <div>
+                    @Html.DropDownListFor(m => m.Gender,
+                            new SelectList(Enum.GetValues(typeof(Gender))),
+                           "Select Gender")
 
-
+                </div>
             </div>
-
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
+<form asp-controller="Address" asp-action="AddAddress">
+    <input type="hidden" asp-for="CustomerId" />
+    <input type="submit" value="AddAddress" class="btn btn-danger" /> |
     <a asp-action="Index">Back to List</a>
-</div>
+</form>
 
