@@ -23,13 +23,9 @@ namespace TestWebApp.Controllers
         // GET: Customer
         public IActionResult Index()
         {
-            //var customers = _context.Customers.Include(o => o.Addresses);
-            //return View(await customers.ToListAsync());
-
-            //return View(await _context.Customers.ToListAsync());
-
             return View(_context.Customers.Include(a => a.Addresses).ToList());
         }
+
 
 
         // GET: Customer/Details/5
@@ -40,9 +36,12 @@ namespace TestWebApp.Controllers
                 return NotFound();
             }
 
-            //var ratings = _context.Addresses.Where(d => d.CustomerId.Equals(id.Value)).ToList();
+            //var addresses = from m in _context.Addresses
+            //               where m.CustomerId == id
+            //               select m;
 
             var customer = await _context.Customers
+                 .Include(o => o.Addresses) 
                 .FirstOrDefaultAsync(m => m.CustomerId == id);
             if (customer == null)
             {
@@ -156,6 +155,23 @@ namespace TestWebApp.Controllers
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.CustomerId == id);
+        }
+
+        public ActionResult New()
+        {
+            var customers = new Customer();
+            customers.CreateAddress(2);
+            return View(customers);
+        }
+
+        public PartialViewResult Addresses(int id)
+        {
+            List<Address> address = (from addr in _context.Addresses
+                                      where addr.CustomerId == id
+                                      select addr).ToList();
+
+            return PartialView(address);
+
         }
     }
 }

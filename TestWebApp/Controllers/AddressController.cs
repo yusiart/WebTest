@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TestWebApp.Data;
 using TestWebApp.Models;
 
@@ -24,10 +26,10 @@ namespace TestWebApp.Controllers
         public IActionResult Index()
         {
 
-            return View(_context.Addresses.Include(a => a.Customer).ToList());
+            return View();
         }
 
-        public async Task<IActionResult> Customer(int? id)
+        public IActionResult Customer(int? id)
         {
             var addresses = _context.Addresses
                 .Where(a => a.CustomerId == id)
