@@ -128,7 +128,7 @@ namespace TestWebApp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Customers");
             }
             return View(address);
         }
@@ -136,6 +136,37 @@ namespace TestWebApp.Controllers
         private bool CustomerExists(int id)
         {
             return _context.Addresses.Any(e => e.Id == id);
+        }
+
+        // GET: Customer/Delete/5
+        public async Task<IActionResult> DeleteAddress(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var address = await _context.Addresses
+                .Include(o => o.Customer)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (address == null)
+            {
+                return NotFound();
+            }
+
+            return View(address);
+        }
+
+        // POST: Customer/Delete/5
+        [HttpPost, ActionName("DeleteAddress")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var address = await _context.Addresses.FindAsync(id);
+            _context.Addresses.Remove(address);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Customers");
         }
     }
 }
