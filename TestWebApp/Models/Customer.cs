@@ -7,26 +7,24 @@ namespace TestWebApp.Models
 {
     public enum Gender
     {
-        male,
-        female
+        Male,
+        Female
     }
 
-    public partial class Customer
+    public class Customer
     {
-        public Customer()
-        {
-            this.Addresses = new HashSet<Address>();
-        }
-
-
         [Key]
+        [Required]
         public int CustomerId { get; set; }
 
+        [Required]
         public string FullName { get; set; }
         [Required]
         [StringLength(30)]
         public string Email { get; set; }
+        [Required]
         public DateTime Birthdate { get; set; }
+        [Required]
         public Gender Gender { get; set; }
         public virtual ICollection<Address> Addresses { get; set; }
     }

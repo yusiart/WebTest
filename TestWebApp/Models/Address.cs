@@ -18,9 +18,14 @@ namespace TestWebApp.Models
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
 
+        [Required]
+        [StringLength(50)]
         public string StreetAddress { get; set; }
         public Country Country { get; set; }
+        [Required]
+        [StringLength(20)]
         public string Zip { get; set; }
+        [Required]
         public int CountryId { get; set; }
         public Customer Customer { get; set; }
     }

@@ -18,8 +18,6 @@ namespace TestWebApp.Data
                 serviceProvider.GetRequiredService<DbContextOptions<CustomerContext>>()))
             {
 
-                //context.Database.EnsureCreated();
-
                 if (context.Customers.Any())
                 {
                     return;
@@ -31,7 +29,7 @@ namespace TestWebApp.Data
                             FullName = "Alez",
                             Email = "example@gmail.com",
                             Birthdate = DateTime.Parse("1995-8-11"),
-                            Gender = Gender.male
+                            Gender = Gender.Male
 
                         },
 
@@ -40,7 +38,7 @@ namespace TestWebApp.Data
                             FullName = "Rick",
                             Email = "alex@gmail.com",
                             Birthdate = DateTime.Parse("1995-3-12"),
-                            Gender = Gender.female
+                            Gender = Gender.Female
 
                         },
 
@@ -49,15 +47,12 @@ namespace TestWebApp.Data
                             FullName = "Alex",
                             Email = "mikhail@inbox.com",
                             Birthdate = DateTime.Parse("1992-8-22"),
-                            Gender = Gender.male
+                            Gender = Gender.Male
 
                         });
 
                 context.SaveChanges();
 
-
-
-                // Addresses
                 if (context.Addresses.Any())
                 {
                     return;

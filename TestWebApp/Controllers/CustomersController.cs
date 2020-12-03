@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -20,14 +17,11 @@ namespace TestWebApp.Controllers
             _context = context;
         }
 
-        // GET: Customer
         public IActionResult Index()
         {
             return View(_context.Customers.Include(a => a.Addresses).ToList());
         }
 
-
-        // GET: Customer/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,13 +41,11 @@ namespace TestWebApp.Controllers
             return View(customer);
         }
 
-        // GET: Customer/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CustomerId ,FullName,Email,Birthdate,Gender, Addresses")] Customer customer)
@@ -67,7 +59,6 @@ namespace TestWebApp.Controllers
             return View(customer);
         }
 
-        // GET: Customer/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,7 +77,6 @@ namespace TestWebApp.Controllers
             return View(customer);
         }
 
-        // POST: Customer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FullName,Email,Birthdate,Gender")] Customer customer)
@@ -120,7 +110,6 @@ namespace TestWebApp.Controllers
             return View(customer);
         }
 
-        // GET: Customer/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -140,7 +129,6 @@ namespace TestWebApp.Controllers
             return View(customer);
         }
 
-        // POST: Customer/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

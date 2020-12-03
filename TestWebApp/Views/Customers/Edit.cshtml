@@ -6,10 +6,6 @@
 
 <h1>Edit</h1>
 
-@*<p>
-    <a asp-controller="Address" asp-action="AddAddress">Create address</a>
-</p>*@
-
 <h4>Customer</h4>
 <hr />
 <div class="row">
@@ -34,7 +30,6 @@
                     <input asp-for="Birthdate" class="form-control" />
                     <span asp-validation-for="Birthdate" class="text-danger"></span>
                 </div>
-
                 @Html.DropDownListFor(m => m.Gender,
                  new SelectList(Enum.GetValues(typeof(Gender))),
                 "Select Gender")
@@ -46,17 +41,6 @@
         <a asp-controller="Address" asp-action="AddAddress" asp-route-id="@Model.CustomerId">Create address</a>
     </div>
 </div>
-
-
-@*<a asp-controller="Address" asp-action="AddAddress" asp-route-id="@Model.CustomerId"/>*@
-@*<input type="hidden" asp-for="CustomerId" />
-<input type="submit" value="AddAddress" class="btn btn-danger"/>*@ 
-
-@*<form asp-controller="Address" asp-action="AddAddress" asp-route-id="@Model.CustomerId">
-    <input type="hidden" asp-for="CustomerId" />
-    <input type="submit" value="AddAddress" class="btn btn-danger"/> 
-</form>*@
-
 
 <a asp-action="Index">Back to List</a>
 

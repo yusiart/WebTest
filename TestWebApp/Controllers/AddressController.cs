@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TestWebApp.Data;
 using TestWebApp.Models;
 
@@ -68,8 +63,6 @@ namespace TestWebApp.Controllers
             return View(address);
         }
 
-
-        // GET: Addresses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -88,7 +81,6 @@ namespace TestWebApp.Controllers
             return View(address);
         }
 
-        // GET: Address/Edit/5
         public async Task<IActionResult> EditAddress(int? id)
         {
             if (id == null)
@@ -107,18 +99,16 @@ namespace TestWebApp.Controllers
             return View(address);
         }
 
-        // POST: Address/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditAddress(int id, [Bind("Id,CustomerId,StreetAddress,Country,Zip,CountryId")] Address address)
         {
-            if (id != address.Id)
+            if(id != address.Id)
             {
                 return NotFound();
             }
 
-
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 try
                 {
@@ -127,7 +117,7 @@ namespace TestWebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(address.Id))
+                    if(!CustomerExists(address.Id))
                     {
                         return NotFound();
                     }
@@ -146,7 +136,6 @@ namespace TestWebApp.Controllers
             return _context.Addresses.Any(e => e.Id == id);
         }
 
-        // GET: Customer/Delete/5
         public async Task<IActionResult> DeleteAddress(int? id)
         {
             if (id == null)
@@ -166,7 +155,6 @@ namespace TestWebApp.Controllers
             return View(address);
         }
 
-        // POST: Customer/Delete/5
         [HttpPost, ActionName("DeleteAddress")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
