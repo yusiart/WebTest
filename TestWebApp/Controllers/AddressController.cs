@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TestWebApp.Data;
 using TestWebApp.Models;
@@ -17,17 +18,16 @@ namespace TestWebApp.Controllers
             _context = context;
         }
 
-
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Addresses.Include(a => a.Country).ToList());
         }
 
         public IActionResult Customer(int? id)
         {
             var addresses = _context.Addresses
                 .Where(a => a.CustomerId == id)
-                .Include(a => a.Customer).ToList();
+                .Include(a => a.Country).ToList();
 
             
             return View(addresses);
@@ -36,18 +36,16 @@ namespace TestWebApp.Controllers
 
         public IActionResult AddAddress(int? id)
         {
-           
             var customer = _context.Customers.Find(id);
-
-
             TempData["Customer"] = customer;
-
+            
+            PopulateCountriesDropDownList();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddAddress([Bind("CustomerId, StreetAddress,Country,Zip,CountryId")] Address address)
+        public async Task<IActionResult> AddAddress([Bind("CustomerId,StreetAddress,CountryId,Zip")] Address address)
         {
 
             if (ModelState.IsValid)
@@ -57,10 +55,17 @@ namespace TestWebApp.Controllers
                 return RedirectToAction("Index", "Customers");
             }
 
-            var customer = _context.Customers.Find(address.CustomerId);
-            TempData["Customer"] = customer;
+            PopulateCountriesDropDownList(address.CountryId);
 
             return View(address);
+        }
+        
+        private void PopulateCountriesDropDownList(object selectedCountry = null)
+        {
+            var countryQuery = from d in _context.Countries
+                orderby d.Name
+                select d;
+            ViewBag.CountryId = new SelectList(countryQuery.AsNoTracking(), "CountryId", "Name", selectedCountry);
         }
 
         public async Task<IActionResult> Details(int? id)

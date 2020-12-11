@@ -6,12 +6,6 @@ namespace TestWebApp.Data
 {
     public class CustomerContext : DbContext
     {
-        public CustomerContext()
-        {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
-        }
-
         public CustomerContext(DbContextOptions<CustomerContext> options)
              : base(options)
         {
@@ -19,5 +13,7 @@ namespace TestWebApp.Data
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        
     }
 }

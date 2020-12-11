@@ -1,0 +1,63 @@
+@model IEnumerable<TestWebApp.Models.Address>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Address Rows</h1>
+
+<p>
+    <a asp-controller="Address" asp-action="AddAddress">Add Address</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StreetAddress)
+        </th>
+        <th>
+            Country
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryId)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StreetAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryId)
+            </td>
+            <td>
+                <a asp-controller="Address" asp-action="EditAddress" asp-route-id="@item.CustomerId">Edit</a> |
+                <a asp-controller="Address" asp-action="DeleteAddress" asp-route-id="@item.CustomerId">Details</a> |
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<p>  <a asp-controller="Customers" asp-action="Index">Back to List</a></p>
+
+

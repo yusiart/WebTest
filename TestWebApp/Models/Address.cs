@@ -4,11 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TestWebApp.Models
 {
-    public enum Country
-    {
-       Latvia,
-       Russia,
-    }
 
     public class Address
     {
@@ -21,12 +16,13 @@ namespace TestWebApp.Models
         [Required]
         [StringLength(50)]
         public string StreetAddress { get; set; }
-        public Country Country { get; set; }
         [Required]
         [StringLength(20)]
         public string Zip { get; set; }
         [Required]
         public int CountryId { get; set; }
+        
+        public Country Country { get; set; }
         public Customer Customer { get; set; }
     }
 }

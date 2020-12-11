@@ -9,8 +9,8 @@ using TestWebApp.Data;
 namespace TestWebApp.Migrations
 {
     [DbContext(typeof(CustomerContext))]
-    [Migration("20201130220540_s")]
-    partial class s
+    [Migration("20201211131058_target")]
+    partial class Target
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,9 +24,6 @@ namespace TestWebApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Country")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("CountryId")
                         .HasColumnType("INTEGER");
 
@@ -34,16 +31,36 @@ namespace TestWebApp.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("StreetAddress")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Zip")
+                        .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CountryId");
+
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("TestWebApp.Models.Country", b =>
+                {
+                    b.Property<int>("CountryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CountryId");
+
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("TestWebApp.Models.Customer", b =>
@@ -56,9 +73,12 @@ namespace TestWebApp.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(30)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Gender")
@@ -71,13 +91,26 @@ namespace TestWebApp.Migrations
 
             modelBuilder.Entity("TestWebApp.Models.Address", b =>
                 {
+                    b.HasOne("TestWebApp.Models.Country", "Country")
+                        .WithMany("Address")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TestWebApp.Models.Customer", "Customer")
                         .WithMany("Addresses")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Country");
+
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("TestWebApp.Models.Country", b =>
+                {
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("TestWebApp.Models.Customer", b =>

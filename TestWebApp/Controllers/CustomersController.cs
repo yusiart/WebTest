@@ -30,8 +30,9 @@ namespace TestWebApp.Controllers
             }
 
             var customer = await _context.Customers
-                 .Include(o => o.Addresses) 
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+                 .Include(o => o.Addresses)
+                 // .ThenInclude(c => c.Country)
+                 .FirstOrDefaultAsync(m => m.CustomerId == id);
 
             if (customer == null)
             {
@@ -40,7 +41,6 @@ namespace TestWebApp.Controllers
 
             return View(customer);
         }
-
         public IActionResult Create()
         {
             return View();
@@ -48,7 +48,7 @@ namespace TestWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId ,FullName,Email,Birthdate,Gender, Addresses")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerId ,FullName,Email,Birthdate,Gender")] Customer customer)
         {
             if (ModelState.IsValid)
             {

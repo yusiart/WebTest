@@ -1,11 +1,8 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
-using TestWebApp.Models;
-using TestWebApp.Data;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using TestWebApp.Models;
 
 namespace TestWebApp.Data
 {
@@ -64,7 +61,6 @@ namespace TestWebApp.Data
                        {
                            CustomerId = 1,
                            StreetAddress = "Baker",
-                           Country = Country.Latvia,
                            Zip = "Lv42",
                            CountryId = 2
                        },
@@ -73,7 +69,6 @@ namespace TestWebApp.Data
                     {
                         CustomerId = 1,
                         StreetAddress = "Rigas",
-                        Country = Country.Latvia,
                         Zip = "Lv41",
                         CountryId = 2
                     },
@@ -82,12 +77,31 @@ namespace TestWebApp.Data
                     {
                         CustomerId = 1,
                         StreetAddress = "Sauiles",
-                        Country = Country.Russia,
                         Zip = "Rus42",
-                        CountryId = 4
+                        CountryId = 1
                     });
 
 
+                context.SaveChanges();
+                
+                
+                if (context.Countries.Any())
+                {
+                    return;
+                }
+
+                context.Countries.AddRange(
+                    new Country
+                    {
+                        CountryId = 2,
+                        Name = "Latvia"
+                    },
+                    new Country
+                    {
+                        CountryId = 1,
+                        Name = "Russia"
+                    });
+                
                 context.SaveChanges();
             }
         }
