@@ -6,7 +6,7 @@ namespace TestWebApp.Models
     public class Country
     {
         [Key] public int CountryId { get; set; }
-        public string Name { get; set; }
-        // public int AddressId { get; set; }
+        [Required] public string Name { get; set; }
+        public ICollection<Address> Addresses { get; set; }
     }
 }

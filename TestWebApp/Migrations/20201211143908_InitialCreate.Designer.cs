@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestWebApp.Data;
 
 namespace TestWebApp.Migrations
 {
     [DbContext(typeof(CustomerContext))]
-    partial class CustomerContextModelSnapshot : ModelSnapshot
+    [Migration("20201211143908_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,7 +20,8 @@ namespace TestWebApp.Migrations
 
             modelBuilder.Entity("TestWebApp.Models.Address", b =>
                 {
-                    b.Property<int>("AddressId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("CountryId")
@@ -37,7 +40,7 @@ namespace TestWebApp.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("AddressId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CountryId");
 

@@ -1,44 +1,40 @@
-﻿
-@model TestWebApp.Models.Address
+﻿@model TestWebApp.Models.Address
 
 @{
     ViewData["Title"] = "AddAddress";
-    var customer = (Customer)TempData["Customer"];
+    var customer = (Customer) TempData["Customer"];
 }
 
 <h1>Create New Address</h1>
 
 <div class="row">
     <div class="col-md-4">
-
-        <form asp-controller="Address" asp-action="AddAddress" asp-route-id="@customer.CustomerId">
+        <form asp-action="AddAddress">
+            @* <form asp-controller="Address" asp-action="AddAddress" asp-route-id="@customer.CustomerId"> *@
+            @* @Html.Hidden("AddressId") *@
             @Html.Hidden("CustomerId", customer.CustomerId)
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="StreetAddress" class="control-label"></label>
-                <input asp-for="StreetAddress" class="form-control" />
+                <input asp-for="StreetAddress" class="form-control"/>
                 <span asp-validation-for="StreetAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Country" class="control-label"></label>
                 <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId">
                     <option value="">-- Select Country --</option>
+                    <option value="1">-- Russia --</option>
+                    <option value="2">-- Latvia --</option>
                 </select>
                 <span asp-validation-for="CountryId" class="text-danger"/>
             </div>
-
             <div class="form-group">
                 <label asp-for="Zip" class="control-label"></label>
                 <input asp-for="Zip" class="form-control"/>
                 <span asp-validation-for="Zip" class="text-danger"></span>
             </div>
-            @* <div class="form-group"> *@
-            @*     <label asp-for="CountryId" class="control-label"></label> *@
-            @*     <input asp-for="CountryId" class="form-control" /> *@
-            @*     <span asp-validation-for="CountryId" class="text-danger"></span> *@
-            @* </div> *@
             <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-primary" />
+                <input type="submit" value="Add" class="btn btn-primary"/>
             </div>
         </form>
     </div>
