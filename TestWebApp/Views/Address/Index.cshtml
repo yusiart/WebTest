@@ -6,12 +6,25 @@
 
 <h1>Address Rows</h1>
 
+<style type="text/css">
+.col {
+	border: 2px solid CadetBlue;
+	width: 1em;
+}
+
+</style>
+<style type="text/css">
+.col {
+	padding: 2em;
+}
+</style>
+
 <dl class="row">
     @{var counter = 1; }
 
     @foreach (var item in Model)
     {
-        <div>
+        <div class="col">
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => item.AddressId)
             </dt>
@@ -36,10 +49,10 @@
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => item.Zip)
             </dd>
-            <th>
+            <div>
                 <a asp-controller="Address" asp-action="EditAddress" asp-route-id="@item.AddressId">Edit</a> |
                 <a asp-controller="Address" asp-action="DeleteAddress" asp-route-id="@item.AddressId">Delete</a> |
-            </th>
+            </div>
         </div>
 
         if (counter % 3 == 0)
@@ -50,7 +63,6 @@
 
         counter++;
     }
-
 </dl>
 
 <p>
