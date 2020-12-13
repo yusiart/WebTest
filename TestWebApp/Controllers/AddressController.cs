@@ -35,16 +35,15 @@ namespace TestWebApp.Controllers
 
         public IActionResult AddAddress(int? id)
         {
-            var customer = Context.Customers.Find(id);
-            TempData["Customer"] = customer;
-            
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddAddress([Bind("AddressId,CustomerId,StreetAddress,CountryId,Zip")] Address address)
+        public async Task<IActionResult> AddAddress(int id, [Bind("AddressId,StreetAddress,CountryId,Zip")] Address address)
         {
+            address.CustomerId = id;
+            
             if (ModelState.IsValid)
             {
                 Context.Add(address);
