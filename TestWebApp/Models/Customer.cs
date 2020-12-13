@@ -13,19 +13,12 @@ namespace TestWebApp.Models
 
     public class Customer
     {
-        [Key]
-        [Required]
-        public int CustomerId { get; set; }
+        [Key] [Required] public int CustomerId { get; set; }
 
-        [Required]
-        public string FullName { get; set; }
-        [Required]
-        [StringLength(30)]
-        public string Email { get; set; }
-        [Required]
-        public DateTime Birthdate { get; set; }
-        [Required]
-        public Gender Gender { get; set; }
+        [Required] public string FullName { get; set; }
+        [Required] [StringLength(30)] public string Email { get; set; }
+        [Required] public DateTime Birthdate { get; set; }
+        [Required] public Gender Gender { get; set; }
         public virtual ICollection<Address> Addresses { get; set; }
     }
 }

@@ -6,42 +6,53 @@
 
 <h1>Address Rows</h1>
 
-@* <table class="row"> *@
 <dl class="row">
-     @foreach (var item in Model)
-     {
-         <div>
-             <dt class="col-sm-2">
-             @Html.DisplayNameFor(model => item.AddressId)
-         </dt>
-         <dd class="col-sm-10">
-             @Html.DisplayFor(model => item.AddressId)
-         </dd>
-         <dt class="col-sm-2">
-             @Html.DisplayNameFor(model => item.StreetAddress)
-         </dt>
-         <dd class="col-sm-10">
-             @Html.DisplayFor(model => item.StreetAddress)
-         </dd>
-         <dt class="col-sm-2">
-             @Html.DisplayNameFor(model => item.Country.Name)
-         </dt>
-         <dd class="col-sm-10">
-             @Html.DisplayFor(model => item.Country.Name)
-         </dd>
-         <dt class="col-sm-2">
-             @Html.DisplayNameFor(model => item.Zip)
-         </dt>
-         <dd class="col-sm-10">
-             @Html.DisplayFor(model => item.Zip)
-         </dd>
-         <th>
-             <a asp-controller="Address" asp-action="EditAddress" asp-route-id="@item.AddressId">Edit</a> |
-             <a asp-controller="Address" asp-action="DeleteAddress" asp-route-id="@item.AddressId">Delete</a> |
-         </th>
-         </div>
-     }
- </dl>
-<p>  <a asp-controller="Customers" asp-action="Index">Back to List</a></p>
+    @{var counter = 1; }
 
+    @foreach (var item in Model)
+    {
+        <div>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => item.AddressId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.AddressId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => item.StreetAddress)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.StreetAddress)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => item.Country.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.Country.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => item.Zip)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.Zip)
+            </dd>
+            <th>
+                <a asp-controller="Address" asp-action="EditAddress" asp-route-id="@item.AddressId">Edit</a> |
+                <a asp-controller="Address" asp-action="DeleteAddress" asp-route-id="@item.AddressId">Delete</a> |
+            </th>
+        </div>
 
+        if (counter % 3 == 0)
+        {
+            @:</dl>
+            @:<dl class="row">
+        }
+
+        counter++;
+    }
+
+</dl>
+
+<p>
+    <a asp-controller="Customers" asp-action="Index">Back to List</a>
+</p>
