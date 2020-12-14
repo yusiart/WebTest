@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +48,7 @@ namespace TestWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId ,FullName,Email,Birthdate,Gender")]
+        public async Task<IActionResult> Create([Bind("CustomerId,FullName,Email,Birthdate,Gender")]
             Customer customer)
         {
             if (ModelState.IsValid)
@@ -90,8 +89,7 @@ namespace TestWebApp.Controllers
             {
                 return NotFound();
             }
-
-
+            
             if (ModelState.IsValid)
             {
                 try
