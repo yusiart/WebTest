@@ -6,8 +6,7 @@ using TestWebApp.Data;
 using TestWebApp.Models;
 
 namespace TestWebApp.Controllers
-{ 
-    
+{
     public class AddressController : Controller
     {
         public CustomerContext Context { get; }
@@ -30,8 +29,7 @@ namespace TestWebApp.Controllers
             
             return View(addresses);
         }
-
-
+        
         public IActionResult AddAddress(int? id)
         {
             return View();
@@ -49,7 +47,7 @@ namespace TestWebApp.Controllers
                 await Context.SaveChangesAsync();
                 return RedirectToAction("Index", "Customers");
             }
-
+         
             return View(address);
         }
         

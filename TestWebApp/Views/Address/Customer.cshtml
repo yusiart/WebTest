@@ -4,8 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>@Html.DisplayFor(model => model.First().Customer.FullName)</h1>
-
 <table class="table">
     <thead>
     <tr>
@@ -54,7 +52,6 @@
     }
     </tbody>
 </table>
-
 <form>
     <a asp-controller="Customers" asp-action="Index">Return to Customer List</a>
 </form>

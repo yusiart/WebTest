@@ -4,12 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Create New Customer</h1>
 
-<h4>Customer</h4>
 <hr/>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -17,26 +16,24 @@
                 <input asp-for="FullName" class="form-control"/>
                 <span asp-validation-for="FullName" class="text-danger"></span>
             </div>
-            <div class="form-group ol-md-6">
+            <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-row">
+            <div class="form-group">
                 <label asp-for="Birthdate" class="control-label"></label>
                 <input asp-for="Birthdate" class="form-control"/>
                 <span asp-validation-for="Birthdate" class="text-danger"></span>
             </div>
-            <div class="form-row">
+            <div class="form-group">
                 <label asp-for="Gender" class="control-label"></label>
                 <select asp-for="Gender" class="form-control" asp-items="new SelectList(Enum.GetValues(typeof(Gender)))">
                     <option value="">-- Select Gender --</option>
                 </select>
-                <span asp-validation-for="Gender" class="text-danger"/>
+                <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
             <div class="form-group">
-            </div>
-            <div class="form-row">
                 <input type="submit" value="Create" class="btn btn-primary"/>
             </div>
         </form>

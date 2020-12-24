@@ -69,3 +69,11 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+
+ .col {
+  border: 3px solid CadetBlue;
+  width: 1em;
+  margin: 15px;
+  padding: 2em;
+}
